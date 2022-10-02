@@ -7,7 +7,7 @@ Now hosted on **g0v.social**. Welcome to follow the bot at https://g0v.social/@r
 ## Deploy the bot
 
 1. Download the source code
-2. Execute `build.sh` to create essential file, create python vnev and make '.sh' file executable.
+2. Execute `build.sh` to create essential file, create python vnev and make `.sh` file executable.
 3. Add your `access_token` into `config.py`
 4. Start python venv by typing `source ./bot_vnev/bin/activate`
 5. Now the bot is ready on your machine. It can be activated through `python bot.py`
