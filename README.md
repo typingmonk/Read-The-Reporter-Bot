@@ -1,6 +1,6 @@
 # Read The Reporter Bot
 
-Posting latest The Reporter(報導者) article links at Mastodon instance.
+Posting latest [The Reporter(報導者)](https://www.twreporter.org) article links at Mastodon instance.
 
 Now hosted on **g0v.social**. Welcome to follow the bot at https://g0v.social/@read_tw_reporter_bot
 
