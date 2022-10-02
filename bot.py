@@ -52,7 +52,7 @@ def main():
             # print(json_data)
 
 
-    update latest_time to record.txt
+    # update latest_time to record.txt
     with open(txt_path, 'w') as file:
        file.write(datetime_str + '\n')
 
