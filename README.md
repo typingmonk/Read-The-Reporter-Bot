@@ -4,6 +4,9 @@ Posting latest [The Reporter(報導者)](https://www.twreporter.org) article lin
 
 Now hosted on **g0v.social**. Welcome to follow the bot at https://g0v.social/@read_tw_reporter_bot
 
+## Requirement
+- `Python 3.x`
+
 ## Deploy the bot
 
 1. Download the source code
