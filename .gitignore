@@ -9,3 +9,6 @@ config.py
 
 # record latest checking time
 record.txt
+
+# ignore .pyc files
+*.pyc
