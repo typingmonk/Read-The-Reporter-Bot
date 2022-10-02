@@ -3,3 +3,9 @@ bot_venv/
 
 # place to store xml files
 rss_feed/
+
+# secret file
+config.py
+
+# record latest checking time
+record.txt
