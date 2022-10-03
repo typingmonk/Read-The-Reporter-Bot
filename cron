@@ -1,1 +1,1 @@
-45 */1 * * * /root/Read-The-Reporter-Bot/toot.sh >> /var/log/cronjobs.log 2>&1
+45 */1 * * * {BASEDIR}/Read-The-Reporter-Bot/toot.sh >> /var/log/cronjobs.log 2>&1
