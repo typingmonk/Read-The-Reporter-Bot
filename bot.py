@@ -36,25 +36,27 @@ def main():
     for item in root.iter('item'):
         time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %Z')
         time = time + timedelta(hours=8)
+        title = item[0].text
         description = item[1].text
         link = item[2].text
-        feed = {'time': time, 'description': description, 'link': link}
+        feed = {'time': time, 'title': title, 'description': description, 'link': link}
         feed_list.append(feed)
 
     # post new feed in time sequence
     for feed in reversed(feed_list):
         if latest_time < feed['time']:
-            toot = feed['description'] + '\n\n' + feed['link']
+            toot = feed['title'] + '\n\n' + feed['description'] + '\n\n' + feed['link']
             data = {'status' : toot}
             headers = {'Authorization': 'Bearer ' + config.access_token}
             r = requests.post(post_url, data=data, headers=headers)
             json_data = r.json()
             # print(json_data)
 
-
     # update latest_time to record.txt
     with open(txt_path, 'w') as file:
-       file.write(datetime_str + '\n')
+        latest_time = feed_list[0]['time']
+        latest_time_str = latest_time.strftime('%Y%m%d%H%M%S')
+        file.write(latest_time_str+ '\n')
 
 if __name__ == '__main__':
     main()
