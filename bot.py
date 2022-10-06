@@ -23,10 +23,8 @@ def main():
         file.write(response.content)
 
     # get last post pubdate (record store in txt file)
-    latest_time = now
     with open(txt_path, 'r') as file:
-        latest_time_str = file.readline().strip()
-        latest_time = datetime.strptime(latest_time_str, '%Y%m%d%H%M%S')
+        latest_link = file.readline().strip()
 
     tree = ET.parse(xml_path)
     root = tree.getroot()
@@ -36,27 +34,29 @@ def main():
     for item in root.iter('item'):
         time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %Z')
         time = time + timedelta(hours=8)
-        title = item[0].text
-        description = item[1].text
-        link = item[2].text
+        title = item[0].text.strip()
+        description = item[1].text.strip()
+        link = item[2].text.strip()
         feed = {'time': time, 'title': title, 'description': description, 'link': link}
         feed_list.append(feed)
 
     # post new feed in time sequence
+    after_latest_link = False
     for feed in reversed(feed_list):
-        if latest_time < feed['time']:
+        if after_latest_link:
             toot = feed['title'] + '\n\n' + feed['description'] + '\n\n' + feed['link']
             data = {'status' : toot}
             headers = {'Authorization': 'Bearer ' + config.access_token}
             r = requests.post(post_url, data=data, headers=headers)
             json_data = r.json()
             # print(json_data)
+        if feed['link'] == latest_link:
+            after_latest_link = True
 
     # update latest_time to record.txt
     with open(txt_path, 'w') as file:
-        latest_time = feed_list[0]['time']
-        latest_time_str = latest_time.strftime('%Y%m%d%H%M%S')
-        file.write(latest_time_str+ '\n')
+        latest_link = feed_list[0]['link'].strip()
+        file.write(latest_link + '\n')
 
 if __name__ == '__main__':
     main()
