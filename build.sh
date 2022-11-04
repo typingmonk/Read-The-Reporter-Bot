@@ -13,5 +13,5 @@ chmod +x $BASEDIR/toot.sh
 python3 -m venv $BASEDIR/bot_venv
 
 # substitute {BASEDIR} in cron and toot.sh
-sed -i "s/{BASEDIR}/$BASEDIR/g" $BASEDIR/toot.sh
-sed -i "s/{BASEDIR}/$BASEDIR/g" $BASEDIR/cron
+sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/toot.sh
+sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/cron
