@@ -4,15 +4,14 @@ BASEDIR=$PWD
 
 # create essential file and folder
 cp $BASEDIR/config.example.py $BASEDIR/config.py
-mkdir $BASEDIR/rss_feed
-
-# create python venv
-python3 -m venv $BASEDIR/bot_venv
-
-# copy cron.example    -> cron
-#      toot.example.sh -> toot.sh
 cp $BASEDIR/cron.example $BASEDIR/cron
 cp $BASEDIR/toot.example.sh $BASEDIR/toot.sh
+[[ -d $BASEDIR/rss_feed ]] && mkdir $BASEDIR/rss_feed
+
+# create python venv
+if [[ -d $BASEDIR/venv ]] ; then
+	python3 -m venv $BASEDIR/venv
+fi
 
 # substitute {BASEDIR} in cron and toot.sh
 ##### for GNU sed

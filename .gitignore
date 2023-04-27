@@ -1,5 +1,5 @@
 # python venv
-bot_venv/
+venv/
 
 # place to store xml files
 rss_feed/
