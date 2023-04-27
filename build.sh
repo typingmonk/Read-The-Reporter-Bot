@@ -13,5 +13,11 @@ chmod +x $BASEDIR/toot.sh
 python3 -m venv $BASEDIR/bot_venv
 
 # substitute {BASEDIR} in cron and toot.sh
-sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/toot.sh
-sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/cron
+##### for GNU sed
+if sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/toot.sh 2>/dev/null ; then
+	sed -i "s {BASEDIR} $BASEDIR g" $BASEDIR/cron
+##### For FreeBSD sed 
+else
+	sed -i "" "s {BASEDIR} $BASEDIR g" $BASEDIR/toot.sh 
+	sed -i "" "s {BASEDIR} $BASEDIR g" $BASEDIR/cron
+fi
