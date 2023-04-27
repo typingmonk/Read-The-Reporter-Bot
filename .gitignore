@@ -12,3 +12,8 @@ record.txt
 
 # ignore .pyc files
 *.pyc
+
+# ignore cron, toot.sh for having absolute path to project folder
+cron
+toot.sh
+
