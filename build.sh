@@ -6,11 +6,13 @@ BASEDIR=$PWD
 cp $BASEDIR/config.example.py $BASEDIR/config.py
 mkdir $BASEDIR/rss_feed
 
-# make .sh file executable.
-chmod +x $BASEDIR/toot.sh
-
 # create python venv
 python3 -m venv $BASEDIR/bot_venv
+
+# copy cron.example    -> cron
+#      toot.example.sh -> toot.sh
+cp $BASEDIR/cron.example $BASEDIR/cron
+cp $BASEDIR/toot.example.sh $BASEDIR/toot.sh
 
 # substitute {BASEDIR} in cron and toot.sh
 ##### for GNU sed
@@ -21,3 +23,6 @@ else
 	sed -i "" "s {BASEDIR} $BASEDIR g" $BASEDIR/toot.sh 
 	sed -i "" "s {BASEDIR} $BASEDIR g" $BASEDIR/cron
 fi
+
+# make .sh file executable.
+chmod +x $BASEDIR/toot.sh
