@@ -6,11 +6,12 @@ BASEDIR=$PWD
 cp $BASEDIR/config.example.py $BASEDIR/config.py
 cp $BASEDIR/cron.example $BASEDIR/cron
 cp $BASEDIR/toot.example.sh $BASEDIR/toot.sh
-[[ -d $BASEDIR/rss_feed ]] && mkdir $BASEDIR/rss_feed
+[[ ! -d $BASEDIR/rss_feed ]] && mkdir $BASEDIR/rss_feed
 
 # create python venv
-if [[ -d $BASEDIR/venv ]] ; then
+if [[ ! -d $BASEDIR/venv ]] ; then
 	python3 -m venv $BASEDIR/venv
+	$BASEDIR/venv/bin/pip install -r $BASEDIR/requirements.txt
 fi
 
 # substitute {BASEDIR} in cron and toot.sh
