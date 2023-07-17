@@ -32,6 +32,7 @@ def main():
     
     # retrieve feed
     for item in root.iter('item'):
+        if item[0].text == "捐款徵信": continue
         time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %Z')
         time = time + timedelta(hours=8)
         title = item[0].text.strip()
