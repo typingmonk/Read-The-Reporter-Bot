@@ -1,4 +1,4 @@
 #!/bin/bash
 
-source "{BASEDIR}/bot_venv/bin/activate"
+source "{BASEDIR}/venv/bin/activate"
 python {BASEDIR}/bot.py
