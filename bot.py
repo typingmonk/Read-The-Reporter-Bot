@@ -8,7 +8,7 @@ def main():
 
     #env
     dir_name = os.path.dirname(__file__)
-    rss_url = 'https://www.twreporter.org/a/rss2.xml'
+    rss_url = 'https://kids.twreporter.org/feed'
     now = datetime.now()
     datetime_str = now.strftime('%Y%m%d%H%M%S').strip()
     xml_name = datetime_str + '.xml'
@@ -33,11 +33,11 @@ def main():
     # retrieve feed
     for item in root.iter('item'):
         if item[0].text == "捐款徵信": continue
-        time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %Z')
+        time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %z')
         time = time + timedelta(hours=8)
         title = item[0].text.strip()
-        description = item[1].text.strip()
-        link = item[2].text.strip()
+        description = item[-4].text.strip()
+        link = item[1].text.strip()
         feed = {'time': time, 'title': title, 'description': description, 'link': link}
         feed_list.append(feed)
 
