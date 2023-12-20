@@ -8,7 +8,7 @@ def main():
 
     #env
     dir_name = os.path.dirname(__file__)
-    rss_url = 'https://kids.twreporter.org/feed'
+    rss_url = 'https://kids-storage.twreporter.org/rss/rss.xml'
     now = datetime.now()
     datetime_str = now.strftime('%Y%m%d%H%M%S').strip()
     xml_name = datetime_str + '.xml'
@@ -33,19 +33,18 @@ def main():
     # retrieve feed
     for item in root.iter('item'):
         if item[0].text == "捐款徵信": continue
-        time = datetime.strptime(item[4].text , '%a, %d %b %Y %H:%M:%S %z')
+        time = datetime.strptime(item[3].text , '%a, %d %b %Y %H:%M:%S GMT')
         time = time + timedelta(hours=8)
         title = item[0].text.strip()
-        description = item[-4].text.strip()
         link = item[1].text.strip()
-        feed = {'time': time, 'title': title, 'description': description, 'link': link}
+        feed = {'time': time, 'title': title, 'link': link}
         feed_list.append(feed)
 
     # post new feed in time sequence
     after_latest_link = False
     for feed in reversed(feed_list):
         if after_latest_link:
-            toot = feed['title'] + '\n\n' + feed['description'] + '\n\n' + feed['link']
+            toot = feed['title'] + '\n\n' + feed['link']
             data = {'status' : toot}
             headers = {'Authorization': 'Bearer ' + config.access_token}
             r = requests.post(post_url, data=data, headers=headers)
